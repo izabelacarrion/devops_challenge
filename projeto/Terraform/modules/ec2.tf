@@ -9,7 +9,7 @@ resource "aws_instance" "srv_web" {
   iam_instance_profile = var.ssm_instance_profile_name
 
   # Adiciona VPC correta
-  subnet_id = aws_vpc.terraform-vpc.id
+  subnet_id = aws_subnet.terraform-subnet.id
 
   # Adiciona IP publico dinâmico
   associate_public_ip_address = true
