@@ -77,4 +77,4 @@ jobs:
 
       - name: Terraform Apply
         working-directory: ./projeto/Terraform
-        run: terraform apply devops_challenge -auto-approve
+        run: terraform apply -auto-approve
