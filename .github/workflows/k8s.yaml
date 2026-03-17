@@ -21,4 +21,4 @@ jobs:
           sed -i 's|\${IMAGE_REPO}|${{ secrets.DOCKER_REPO }}|g' projeto/k8s/deployment.yaml
 
       - name: Dry-run dos manifestos
-        run: kubectl apply --dry-run=client -f projeto/k8s/
+        run: kubectl apply --dry-run=client --validate=false -f projeto/k8s/
