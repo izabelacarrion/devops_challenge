@@ -1,4 +1,7 @@
 # Criando a VPC
+
+# Deve ignorar validacao do tfsec por ser ambiente de teste
+# tfsec:ignore:aws-ec2-require-vpc-flow-logs-for-all-vpcs
 resource "aws_vpc" "terraform-vpc" {
   cidr_block = var.cidr_bloco_da_vpc
 
@@ -9,9 +12,8 @@ resource "aws_vpc" "terraform-vpc" {
 
 # Criando a subnet
 resource "aws_subnet" "terraform-subnet" {
-  vpc_id                  = aws_vpc.terraform-vpc.id
-  cidr_block              = join("", cidrsubnets(aws_vpc.terraform-vpc.cidr_block, 8))
-  map_public_ip_on_launch = true
+  vpc_id     = aws_vpc.terraform-vpc.id
+  cidr_block = join("", cidrsubnets(aws_vpc.terraform-vpc.cidr_block, 8))
 
   tags = {
     Name = "SUB-${var.ambiente}"

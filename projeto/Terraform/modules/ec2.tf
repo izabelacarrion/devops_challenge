@@ -2,6 +2,9 @@
 resource "aws_instance" "srv_web" {
   ami           = data.aws_ami.amazon_linux.id
   instance_type = "t2.micro"
+  metadata_options {
+    http_tokens = "required"
+  }
 
   iam_instance_profile = var.ssm_instance_profile_name
 
@@ -17,6 +20,7 @@ resource "aws_instance" "srv_web" {
   # Criando nome do volume e tamanho do volume
   root_block_device {
     volume_size = 8
+    encrypted   = true
   }
 
   tags = {
