@@ -1,0 +1,35 @@
+name: Deploy Docker
+
+on:
+  workflow_dispatch:
+    paths:
+      - 'app/**'
+      - 'docker/**'
+
+jobs:
+  docker-build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Login no Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_TOKEN }}
+
+      - name: Build da imagem
+        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/devops_challenge:v1.0.0 -f docker/Dockerfile .
+
+      - name: Scan de vulnerabilidades com Trivy
+        uses: aquasecurity/trivy-action@0.20.0
+        with:
+          image-ref: ${{ secrets.DOCKER_USERNAME }}/devops_challenge:v1.0.0
+          format: 'table'
+          exit-code: '1'
+          severity: 'CRITICAL,HIGH'
+
+      - name: Push da imagem
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/devops_challenge:v1.0.0

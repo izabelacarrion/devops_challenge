@@ -1,0 +1,24 @@
+name: Kubernetes Validation
+
+on:
+  workflow_dispatch:
+
+jobs:
+  k8s-dry-run:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Instalar kubectl
+        uses: azure/setup-kubectl@v4
+        with:
+          version: '1.0.0'
+
+      - name: Substituir variável
+        run: |
+          sed -i 's|\${IMAGE_REPO}|${{ secrets.DOCKER_REPO }}|g' k8s/deployment.yaml
+
+      - name: Dry-run dos manifestos
+        run: kubectl apply --dry-run=client -f k8s/
