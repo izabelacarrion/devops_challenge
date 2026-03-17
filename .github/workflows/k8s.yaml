@@ -4,21 +4,23 @@ on:
   workflow_dispatch:
 
 jobs:
-  k8s-dry-run:
+  k8s-validate:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout do código
         uses: actions/checkout@v4
 
-      - name: Instalar kubectl
-        uses: azure/setup-kubectl@v4
-        with:
-          version: 'latest'
-
       - name: Substituir variável
         run: |
           sed -i 's|\${IMAGE_REPO}|${{ secrets.DOCKER_REPO }}|g' projeto/k8s/deployment.yaml
 
-      - name: Dry-run dos manifestos
-        run: kubectl apply --dry-run=client --validate=false -f projeto/k8s/
+      - name: Instalar kubeconform
+        run: |
+          curl -L -o kubeconform.tar.gz https://github.com/yannh/kubeconform/releases/latest/download/kubeconform-linux-amd64.tar.gz
+          tar -xzf kubeconform.tar.gz
+          chmod +x kubeconform
+          sudo mv kubeconform /usr/local/bin/
+
+      - name: Validar manifestos
+        run: kubeconform -strict -summary projeto/k8s/*.yaml
