@@ -16,6 +16,9 @@ Exemplo de resposta:
 }
 ```
 
+<img width="527" height="142" alt="image" src="https://github.com/user-attachments/assets/c0b97215-f5ec-4e68-b588-fd26b0c7115d" />
+
+
 ## Estrutura do projeto
 ```
 .
