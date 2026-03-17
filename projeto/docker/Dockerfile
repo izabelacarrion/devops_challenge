@@ -1,4 +1,6 @@
-FROM python:3.12-alpine3.20
+FROM python:3.12-alpine3.23
+
+RUN apk update && apk upgrade --no-cache
 
 RUN addgroup -S appgroup && adduser -S appuser -G appgroup
 
