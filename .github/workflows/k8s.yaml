@@ -14,11 +14,11 @@ jobs:
       - name: Instalar kubectl
         uses: azure/setup-kubectl@v4
         with:
-          version: '1.0.0'
+          version: 'latest'
 
       - name: Substituir variável
         run: |
-          sed -i 's|\${IMAGE_REPO}|${{ secrets.DOCKER_REPO }}|g' k8s/deployment.yaml
+          sed -i 's|\${IMAGE_REPO}|${{ secrets.DOCKER_REPO }}|g' projeto/k8s/deployment.yaml
 
       - name: Dry-run dos manifestos
-        run: kubectl apply --dry-run=client -f k8s/
+        run: kubectl apply --dry-run=client -f projeto/k8s/
