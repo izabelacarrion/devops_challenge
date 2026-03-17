@@ -24,7 +24,7 @@ jobs:
           password: ${{ secrets.DOCKER_TOKEN }}
 
       - name: Build da imagem
-        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/devops_challenge:v1.0.0 -f docker/Dockerfile .
+        run: docker build -t ${{ secrets.DOCKER_REPO }}/devops_challenge:v1.0.0 -f projeto/docker/Dockerfile projeto
 
       - name: Scan de vulnerabilidades com Trivy
         uses: aquasecurity/trivy-action@0.20.0
