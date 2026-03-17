@@ -1,5 +1,5 @@
-name: Terraform Deploy
-run-name: ${{ github.actor }} iniciou o deploy
+name: Terraform Destroy
+run-name: ${{ github.actor }} iniciou o destroy
 
 on:
   workflow_dispatch:
