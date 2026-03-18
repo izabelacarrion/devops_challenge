@@ -89,9 +89,12 @@ Contém os manifestos Kubernetes para deploy da aplicação.
 
 O projeto inclui pipeline automatizada para:
 
-- Build da imagem Docker  
-- Scan de vulnerabilidades com **Trivy**  
-- Push da imagem para o Docker Hub  
+- Build da imagem Docker (com Push da imagem para o Docker Hub)
+- Validação do manifesto do K8s
+- Deploy de estrutura na Cloud AWS utilizando o Terraform
+- Scan de vulnerabilidades com **Trivy**
+- Scan de configurações aplicadas no Terraform usando o TFSec
+  
 
 #### ✅ Boas práticas aplicadas
 
@@ -106,7 +109,7 @@ Contém a infraestrutura como código (IaC) utilizada para provisionar recursos 
 #### 📄 O que é provisionado
 
 - Criação de rede (VPC, subnets, etc.)  
-- Provisionamento de instâncias (ex: EC2)  
+- Provisionamento de instâncias (EC2)  
 - Configuração de recursos necessários para execução da aplicação  
 
 #### 🧠 Boas práticas aplicadas
