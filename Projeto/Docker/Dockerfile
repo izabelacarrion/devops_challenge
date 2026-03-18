@@ -4,11 +4,11 @@ RUN apk update && apk upgrade --no-cache
 
 RUN addgroup -S appgroup && adduser -S appuser -G appgroup
 
-WORKDIR /app
+WORKDIR /App
 
-COPY app/app.py .
+COPY App/app.py .
 
-RUN chown -R appuser:appgroup /app
+RUN chown -R appuser:appgroup /App
 
 USER appuser
 
