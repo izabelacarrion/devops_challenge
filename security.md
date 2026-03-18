@@ -13,8 +13,8 @@ Para gerenciamento seguro de credenciais e informações sensíveis:
 - Em ambientes produtivos, recomendável utilizar:
   - AWS Secrets Manager
   - AWS SSM Parameter Store
-  - HashiCorp Vault
-  - Kubernetes Secrets
+
+
 
 ### ✅ Boas práticas
 
@@ -32,7 +32,7 @@ Para gerenciamento seguro de credenciais e informações sensíveis:
   - Credenciais em arquivos `.tf`, `.yaml`, `.env` versionados
 - Uso de `.gitignore` e `.dockerignore` para evitar vazamento de arquivos sensíveis
 - Utilização de autenticação moderna, estou utilizando o: **OIDC** ao invés de chaves estáticas
-
+- Implementação de RBAC, gerenciando permissões por grupos.
 ---
 
 ## 🐳 Segurança da imagem Docker
@@ -43,23 +43,25 @@ Para gerenciamento seguro de credenciais e informações sensíveis:
 - Uso de imagem base oficial
 - Scan de vulnerabilidades com **Trivy** no pipeline. Em uma das actions é possível identificar que o Trivy validou a versão do Alpine em uso pelo Dockerfile, o que posteriormente foi corrigido:
 
-![alt text](image.png)
+![alt text](Assets/trivy.png)
 
 ### 🔒 Melhorias recomendadas:
 
 - Remover pacotes desnecessários
-- Implementar **multi-stage build**
-- Validar imagem antes do deploy (fail em vulnerabilidades críticas)
 
 ---
 
 ## 🛠️ Patch de vulnerabilidades com Copacetic
 
-O projeto pode ser evoluído utilizando o :contentReference[oaicite:0]{index=0} para reforçar a segurança das imagens.
+O projeto pode ser evoluído utilizando o COPACETIC para reforçar a segurança das imagens.
 
-- O Copacetic permite **corrigir vulnerabilidades diretamente na imagem Docker sem rebuild completo** :contentReference[oaicite:1]{index=1}  
-- Ele utiliza resultados de scanners como o Trivy para aplicar atualizações automaticamente :contentReference[oaicite:2]{index=2}  
-- Cria uma nova camada de patch, reduzindo tempo e custo de atualização :contentReference[oaicite:3]{index=3}  
+- O Copacetic permite **corrigir vulnerabilidades diretamente na imagem Docker sem rebuild completo** 
+- Ele utiliza resultados de scanners como o Trivy para aplicar atualizações automaticamente  
+- Cria uma nova camada de patch, reduzindo tempo e custo de atualização 
+
+- **Seu uso deve ser feito com cautela, sendo mais indicado inicialmente para**:
+- Correção de vulnerabilidades relacionadas ao sistema operacional da imagem
+- Cenários onde uma correção rápida é necessária
 
 ### Benefícios:
 
@@ -83,7 +85,6 @@ Este projeto já aplica boas práticas iniciais, como:
 
 E pode evoluir com:
 - Patch automático de imagens (Copacetic)
-- Gestão centralizada de segredos
 - Políticas mais avançadas de acesso em cloud
 - Separação dos ambientes. Ex: prod, stg, hml 
 
@@ -94,5 +95,5 @@ E pode evoluir com:
 
 O kubeconform permite validar os manifests de forma rápida e independente de um cluster, garantindo que erros de sintaxe ou incompatibilidade com a API do Kubernetes sejam detectados antecipadamente.
 
-![alt text](image-1.png)
+![alt text](Assets/k8s.png)
 

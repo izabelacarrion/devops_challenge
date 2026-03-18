@@ -13,7 +13,7 @@ jobs:
 
       - name: Substituir variável
         run: |
-          sed -i 's|\${IMAGE_REPO}|${{ secrets.DOCKER_REPO }}|g' projeto/k8s/deployment.yaml
+          sed -i 's|\${IMAGE_REPO}|${{ secrets.DOCKER_REPO }}|g' Projeto/K8s/deployment.yaml
 
       - name: Instalar kubeconform
         run: |
@@ -23,4 +23,4 @@ jobs:
           sudo mv kubeconform /usr/local/bin/
 
       - name: Validar manifestos
-        run: kubeconform -strict -summary projeto/k8s/*.yaml
+        run: kubeconform -strict -summary Projeto/K8s/*.yaml

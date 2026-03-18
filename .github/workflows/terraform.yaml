@@ -20,11 +20,11 @@ jobs:
         uses: hashicorp/setup-terraform@v3
 
       - name: Terraform Init
-        working-directory: ./projeto/Terraform
+        working-directory: ./Projeto/Terraform
         run: terraform init -backend=false
 
       - name: Terraform Validate
-        working-directory: ./projeto/Terraform
+        working-directory: ./Projeto/Terraform
         run: terraform validate
 
   security_scan:
@@ -37,7 +37,7 @@ jobs:
       - name: Rodar tfsec
         uses: aquasecurity/tfsec-action@v1.0.0
         with:
-          working_directory: ./projeto/Terraform
+          working_directory: ./Projeto/Terraform
 
   infraestrutura:
     name: Planejamento e aplicação da infraestrutura
@@ -61,20 +61,20 @@ jobs:
         uses: hashicorp/setup-terraform@v3
 
       - name: Criar arquivo de backend
-        working-directory: ./projeto/Terraform
+        working-directory: ./Projeto/Terraform
         run: |
           cat <<EOF > backend-config.tfvars
           ${{ secrets.BACKEND_CONFIG }}
           EOF
 
       - name: Terraform Init
-        working-directory: ./projeto/Terraform
+        working-directory: ./Projeto/Terraform
         run: terraform init -backend-config="backend-config.tfvars"
 
       - name: Terraform Plan
-        working-directory: ./projeto/Terraform
+        working-directory: ./Projeto/Terraform
         run: terraform plan -out devops_challenge
 
       - name: Terraform Apply
-        working-directory: ./projeto/Terraform
+        working-directory: ./Projeto/Terraform
         run: terraform apply -auto-approve

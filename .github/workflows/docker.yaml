@@ -5,8 +5,8 @@ on:
     branches:
       - main
     paths:
-      - 'projeto/app/**'
-      - 'projeto/docker/**'
+      - 'Projeto/App/**'
+      - 'Projeto/Docker/**'
   workflow_dispatch:
 
 jobs:
@@ -24,7 +24,7 @@ jobs:
           password: ${{ secrets.DOCKER_TOKEN }}
 
       - name: Build da imagem
-        run: docker build -t ${{ secrets.DOCKER_REPO }}/devops_challenge:v1.0.0 -f projeto/docker/Dockerfile projeto
+        run: docker build -t ${{ secrets.DOCKER_REPO }}/devops_challenge:v1.0.0 -f Projeto/Docker/Dockerfile Projeto
 
       - name: Scan de vulnerabilidades com Trivy
         uses: aquasecurity/trivy-action@0.20.0

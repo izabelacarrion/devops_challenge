@@ -55,7 +55,6 @@ Contém os arquivos necessários para a containerização da aplicação.
 - Utilizado imagem do alpine por ser de um tamanho menor
 - Execução com usuário **não-root**  
 - Exposição da porta `8080`  
-- Build simples e eficiente  
 
 #### 🧠 Decisões tomadas
 
@@ -64,8 +63,6 @@ Contém os arquivos necessários para a containerização da aplicação.
 
 #### 🔒 Melhorias possíveis
 
-- Implementar **multi-stage build**  
-- Reduzir número de camadas  
 - Melhorar caching de dependências  
 
 ### ☸️ Kubernetes
@@ -119,3 +116,5 @@ Contém a infraestrutura como código (IaC) utilizada para provisionar recursos 
 - Código reutilizável e organizado  
 - Versionamento da infraestrutura  
 - Uso de backend remoto via S3
+
+🔒 Para mais detalhes sobre as decisões de segurança adotadas no projeto, acesse [este documento](./security.md).
